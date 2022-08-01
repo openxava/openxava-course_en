@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+
+	<JarScanner scanClassPath="false" />
+	
+	<!-- 
+	To define the access to your database uncomment the corresponding one
+	from the below configurations. If you don't find yours, look in internet 
+	for the URL for your database and define your own Resource entry.
+	
+	You have to adapt the URL to match your server, and maybe the port.
+	You have to define the correct user name and password for your database.
+	
+	Moreover, you have to add the dependency for the corresponding JDBC 
+	driver to the pom.xml of your project.
+	-->
+	 
+	<!-- HSQLDB -->   	
+    <Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="sa" password="" 
+	      url="jdbc:hsqldb:hsql://localhost:1666"/>
+	      
+	<!-- MySQL       
+    <Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="root" password="" 
+	      url="jdbc:mysql://localhost:3306/invoicingdb"/>	      
+	-->      
+	
+	<!-- PostgreSQL 
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="postgres" password="" 
+	      url="jdbc:postgresql://localhost/invoicingdb"/>
+	-->
+	
+	<!-- Oracle 
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="user" password="" 
+	      url="jdbc:oracle:thin:@localhost:1521:invoicingdb"/>
+	-->	
+	
+	<!-- AS/400 
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="user" password="" 
+	      url="jdbc:as400:localhost/invoicinglib"/>
+	-->
+	
+	<!-- Microsoft SQL Server
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="user" password="" 
+	      url="jdbc:sqlserver://localhost:1433;databaseName=invoicingdb"/>
+	-->
+	
+	<!-- Informix
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="user" password="" 
+	      url="jdbc:informix-sqli://localhost:1533/invoicingdb:INFORMIXSERVER=yourserver"/>
+	-->            
+	
+	<!-- Db2
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="user" password="" 
+	      url="jdbc:db2://localhost:50000/invoicingdb"/>
+	-->
+	
+	<!-- Firebird
+	<Resource name="jdbc/invoicingDS" auth="Container" type="javax.sql.DataSource"
+	      maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+	      username="user" password="" 
+	      url="jdbc:firebirdsql://localhost:3050/c:/db/invoicing.fdb"/>
+	-->
+	      	      
+</Context>
