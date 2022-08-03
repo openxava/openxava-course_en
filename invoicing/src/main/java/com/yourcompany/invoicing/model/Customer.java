@@ -18,4 +18,6 @@ public class Customer {
     @Required  // A validation error will be shown if the name property is left empty
     String name;
  
+    @Embedded // This is the way to reference an embeddable class
+    Address address; // A regular Java reference
 }

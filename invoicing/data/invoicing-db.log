@@ -1,25 +1,2 @@
-/*C1*/SET SCHEMA SYSTEM_LOBS
-INSERT INTO BLOCKS VALUES(0,2147483647,0)
-COMMIT
-/*C2*/SET SCHEMA PUBLIC
+/*C5*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C3*/SET SCHEMA PUBLIC
-create table Customer (number integer not null, name varchar(50), primary key (number))
-create table IMAGES (ID varchar(32) not null, GALLERY varchar(32), image varbinary(16777216), primary key (ID))
-create table OXDISCUSSIONCOMMENTS (id varchar(32) not null, comment clob(16777216), discussionId varchar(32), time timestamp, userName varchar(30), primary key (id))
-create table Product (number integer not null, description varchar(50), primary key (number))
-create index IDXbhlx4vunn24ym1tbrlgq8g30m on OXDISCUSSIONCOMMENTS (discussionId)
-INSERT INTO PRODUCT VALUES(1,'JOHN')
-COMMIT
-INSERT INTO PRODUCT VALUES(2,'OLIVIA')
-COMMIT
-DELETE FROM PRODUCT WHERE NUMBER=1
-INSERT INTO PRODUCT VALUES(1,'XavaPro Professional')
-COMMIT
-DELETE FROM PRODUCT WHERE NUMBER=2
-INSERT INTO PRODUCT VALUES(2,'XavaPro Enterprise')
-COMMIT
-INSERT INTO CUSTOMER VALUES(1,'Peter')
-COMMIT
-INSERT INTO CUSTOMER VALUES(2,'Olivia')
-COMMIT
