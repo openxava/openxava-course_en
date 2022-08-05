@@ -1,7 +1,5 @@
 package com.yourcompany.invoicing.model;
  
-import java.math.*;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 
@@ -22,15 +20,5 @@ public class Category {
  
     @Column(length=50)
     String description;
-    
-    @Money // Instead of @Stereotype("MONEY") 
-    BigDecimal price; 
-     
-    @Files // Instead of @Stereotype("IMAGES_GALLERY") 
-    @Column(length=32)
-    String photos;
-     
-    @TextArea // Instead of @Stereotype("MEMO") 
-    String remarks;
  
 }
