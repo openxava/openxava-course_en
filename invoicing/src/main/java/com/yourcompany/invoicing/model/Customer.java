@@ -8,6 +8,9 @@ import lombok.*;
  
 @Entity  // This marks Customer class as an entity
 @Getter @Setter // This makes all fields below publicly accessible
+@View(name="Simple", // This view is used only when “Simple” is specified
+members="number, name" // Shows only number and name in the same line
+)
 public class Customer {
  
     @Id  // The number property is the key property. Keys are required by default
