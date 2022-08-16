@@ -14,7 +14,7 @@ public class NextNumberForYearCalculator implements ICalculator { // A calculato
  
     public Object calculate() throws Exception { // It does the calculation
         Query query = XPersistence.getManager() // A JPA query
-        						  .createQuery("select max(i.number) from Invoice i where i.year = :year"); // The query returns
+        						  .createQuery("select max(i.number) from CommercialDocument i where i.year = :year"); // The query returns
                                                                 // the max invoice number of the indicated year
         query.setParameter("year", year); // We use the injected year as a parameter for the query
         Integer lastNumber = (Integer) query.getSingleResult();
