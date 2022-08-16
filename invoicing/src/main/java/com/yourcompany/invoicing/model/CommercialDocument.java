@@ -19,7 +19,7 @@ import lombok.*;
 "details;" +
 "remarks"
 )
-public abstract class CommercialDocument extends Identifiable{
+abstract public class CommercialDocument extends Identifiable{
 
     @Column(length=4)
     @DefaultValueCalculator(CurrentYearCalculator.class) // Current year
