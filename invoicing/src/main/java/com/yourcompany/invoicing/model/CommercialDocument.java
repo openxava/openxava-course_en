@@ -13,11 +13,13 @@ import com.yourcompany.invoicing.calculators.*;
 import lombok.*;
  
 @Entity @Getter @Setter
-@View(members= // This view has no name, so it will be the view used by default
-"year, number, date;" + // Comma separated means in the same line
-"customer;" + // Semicolon means a new line
-"details;" +
-"remarks"
+@View(members=
+"year, number, date," + // The members for the header part in one line
+"data {" + // A tab 'data' for the main data of the document
+    "customer;" +
+    "details;" +
+    "remarks" +
+"}"
 )
 abstract public class CommercialDocument extends Identifiable{
 
