@@ -43,7 +43,7 @@ abstract public class CommercialDocument extends Identifiable{
     Customer customer;
     
     @ElementCollection
-    @ListProperties("product.number, product.description, quantity")
+    @ListProperties("product.number, product.description, quantity, amount") // amount added
     Collection<Detail> details;
     
     @TextArea
