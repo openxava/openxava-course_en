@@ -1,9 +1,11 @@
 package com.yourcompany.invoicing.model;
  
+import java.math.*;
 import java.time.*;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
@@ -43,10 +45,29 @@ abstract public class CommercialDocument extends Identifiable{
     Customer customer;
     
     @ElementCollection
-    @ListProperties("product.number, product.description, quantity, pricePerUnit, amount") // pricePerUnit added
+    @ListProperties(
+            "product.number, product.description, quantity, pricePerUnit, " +
+            "amount+[" + 
+            	"commercialDocument.vatPercentage," +
+            	"commercialDocument.vat," +
+            	"commercialDocument.totalAmount" +
+            "]" 
+        )
     Collection<Detail> details;
     
     @TextArea
     String remarks;
  
+    @Digits(integer=2, fraction=0) // To indicate its size
+    BigDecimal vatPercentage;
+       
+    @ReadOnly
+    @Money
+    @Calculation("sum(details.amount) * vatPercentage / 100")
+    BigDecimal vat;
+
+    @ReadOnly
+    @Money
+    @Calculation("sum(details.amount) + vat")    
+    BigDecimal totalAmount;    
 }
