@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 
 import org.openxava.annotations.*;
 import org.openxava.calculators.*;
+import org.openxava.jpa.*;
 
 import com.yourcompany.invoicing.calculators.*;
 
@@ -30,10 +31,10 @@ abstract public class CommercialDocument extends Identifiable{
     int year;
  
     @Column(length=6)
-    @DefaultValueCalculator(value=NextNumberForYearCalculator.class,
-    properties=@PropertyValue(name="year") // To inject the value of year from Invoice to
-                                               // the calculator before calling to calculate()
-    )
+    // @DefaultValueCalculator(value=NextNumberForYearCalculator.class, // Remove this
+    //      properties=@PropertyValue(name="year")
+    // )
+    @ReadOnly // The user cannot modify the value
     int number;
  
     @Required
@@ -71,4 +72,15 @@ abstract public class CommercialDocument extends Identifiable{
     @Money
     @Calculation("sum(details.amount) + vat")    
     BigDecimal totalAmount;    
+    
+    @PrePersist // Executed just before saving the object for the first time
+    private void calculateNumber() throws Exception {
+        Query query = XPersistence.getManager()
+            .createQuery("select max(i.number) from " +
+            getClass().getSimpleName() + // Thus it's valid for both Invoice and Order
+            " i where i.year = :year");
+        query.setParameter("year", year);
+        Integer lastNumber = (Integer) query.getSingleResult();
+        this.number = lastNumber == null ? 1 : lastNumber + 1;
+    }
 }
