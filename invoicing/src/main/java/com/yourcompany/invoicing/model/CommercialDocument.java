@@ -59,6 +59,7 @@ abstract public class CommercialDocument extends Identifiable{
     String remarks;
  
     @Digits(integer=2, fraction=0) // To indicate its size
+    @DefaultValueCalculator(VatPercentageCalculator.class)
     BigDecimal vatPercentage;
        
     @ReadOnly
