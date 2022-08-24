@@ -67,6 +67,11 @@ abstract public class CommercialDocument extends Identifiable{
     @Money
     @Calculation("sum(details.amount) * vatPercentage / 100")
     BigDecimal vat;
+    
+    @org.hibernate.annotations.Formula("TOTALAMOUNT * 0.10") // The calculation using SQL
+    @Setter(AccessLevel.NONE) // The setter is not generated, only the getter is needed
+    @Money
+    BigDecimal estimatedProfit; // A field, as in the persistent property case
 
     @ReadOnly
     @Money
