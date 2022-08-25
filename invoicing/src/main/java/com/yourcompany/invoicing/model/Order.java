@@ -11,7 +11,7 @@ import lombok.*;
 @Entity	 @Getter @Setter
 @View(extendsView="super.DEFAULT", 
 members=
-    "estimatedDeliveryDays," + // ADD THIS LINE
+	"estimatedDeliveryDays, delivered," + // Add delivered
     "invoice { invoice }"
 )
 @View( name="NoCustomerNoInvoice", // A view named NoCustomerNoInvoice
@@ -20,6 +20,15 @@ members=                       // that does not include customer and invoice.
     "details;" +
     "remarks"
 )
+@EntityValidator(
+	    value=com.yourcompany.invoicing.validators.DeliveredToBeInInvoiceValidator.class, // The class with the validation logic
+	    properties= {
+	        @PropertyValue(name="year"), // The content of these properties
+	        @PropertyValue(name="number"), // is moved from the 'Order' entity
+	        @PropertyValue(name="invoice"), // to the validator before
+	        @PropertyValue(name="delivered") // executing the validation
+	    }
+	)
 public class Order extends CommercialDocument{
 
     @ManyToOne
@@ -43,4 +52,7 @@ public class Order extends CommercialDocument{
     private void recalculateDeliveryDays() {
         setDeliveryDays(getEstimatedDeliveryDays());
     }
+    
+    @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
+    boolean delivered;
 }
