@@ -16,7 +16,8 @@ public class Product {
     @Id @Column(length=9)
     int number;
     
-    @Column(length=13) @ISBN
+    @Column(length=13) 
+    @ISBN(search=false) // In this case no internet search is done to validate the ISBN
     String isbn;
  
     @Column(length=50) @Required

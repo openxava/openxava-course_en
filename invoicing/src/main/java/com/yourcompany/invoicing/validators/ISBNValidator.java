@@ -17,14 +17,16 @@ public class ISBNValidator
         validator = 
             new org.apache.commons.validator.routines.ISBNValidator();
  
+    private boolean search; // Stores the search option
+    
     public void initialize(ISBN isbn) {
- 
+    	this.search = isbn.search();
     }
  
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (Is.empty(value)) return true;
         if (!validator.isValid(value.toString())) return false;
-        return isbnExists(value); // Here we do the REST call
+        return search ? isbnExists(value) : true; // Using 'search'
     }
     
     private boolean isbnExists(Object isbn) {
