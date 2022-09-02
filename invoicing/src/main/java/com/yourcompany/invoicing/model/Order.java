@@ -22,6 +22,8 @@ members=                       // that does not include customer and invoice.
     "details;" +
     "remarks"
 )
+@Tab(baseCondition = "deleted = false")
+@Tab(name="Deleted", baseCondition = "deleted = true") // A named tab
 public class Order extends CommercialDocument{
 
     @ManyToOne
@@ -61,13 +63,18 @@ public class Order extends CommercialDocument{
     	}
     
     //Validation alternative with JPA callback method
-    @PreRemove // Just before removing the entity
-    private void validateOnRemove() {
-        if (invoice != null) { // The validation logic
-            throw new javax.validation.ValidationException( // Throws a runtime exception
-                XavaResources.getString( // To get the text message
+    @PreRemove
+    private void validateOnRemove() { // Now this method is not executed automatically
+        if (invoice != null) { // since a real deleletion is not done
+            throw new javax.validation.ValidationException(
+                XavaResources.getString(
                     "cannot_delete_order_with_invoice"));
         }
+    }
+    
+    public void setDeleted(boolean deleted) {
+        if (deleted) validateOnRemove(); // We call the validation explicitly
+        super.setDeleted(deleted);
     }
     
 }

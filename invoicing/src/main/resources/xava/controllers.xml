@@ -3,23 +3,47 @@
 <!DOCTYPE controllers SYSTEM "dtds/controllers.dtd">
 
 <controllers>
-    
-    <!-- Environment variable:
-    <env-var name="invoicing_DEFAULT_YEAR" value="2015"/> 
-    -->
-    
-    <!-- Session object:
-    <object name="invoicing_activeYear" class="java.lang.Integer" value="2015" 
-    	    scope="global"/>    
-    -->
-    
-    <!-- Controller:
-    <controller name="Teacher">
-    	<extends controller="Typical"/>
-    	<action name="new" icon="library-plus" keystroke="Control N"
-        	class="actions.CreateTeacher">
-    	</action>
-	</controller>    
-    -->
-    
+
+	<!-- Environment variable: <env-var name="invoicing_DEFAULT_YEAR" value="2015"/> -->
+
+	<!-- Session object: <object name="invoicing_activeYear" class="java.lang.Integer" 
+		value="2015" scope="global"/> -->
+
+	<!-- Controller: <controller name="Teacher"> <extends controller="Typical"/> 
+		<action name="new" icon="library-plus" keystroke="Control N" class="actions.CreateTeacher"> 
+		</action> </controller> -->
+	<env-var name="XAVA_SEARCH_ACTION"
+		value="Invoicing.searchExcludingDeleted" />
+	<controller name="Invoicing"> <!-- The same name as the entity -->
+
+		<extends controller="Typical" /> <!-- It has all the actions from Typical -->
+
+		<!-- Typical already has a 'delete' action, by using the same name we override 
+			it -->
+		<action name="delete" mode="detail" confirm="true"
+			class="com.yourcompany.invoicing.actions.InvoicingDeleteAction"
+			icon="delete" available-on-new="false" keystroke="Control D" />
+
+		<action name="searchExcludingDeleted" hidden="true"
+			class="com.yourcompany.invoicing.actions.SearchExcludingDeletedAction" />
+
+		<action name="deleteSelected" mode="list" confirm="true"
+			process-selected-items="true" icon="delete"
+			class="com.yourcompany.invoicing.actions.InvoicingDeleteSelectedAction"
+			keystroke="Control D" />
+
+		<action name="deleteRow" mode="NONE" confirm="true"
+			class="com.yourcompany.invoicing.actions.InvoicingDeleteSelectedAction"
+			icon="delete" in-each-row="true" />
+
+	</controller>
+
+	<controller name="Trash">
+		<action name="restore" mode="list"
+			class="com.yourcompany.invoicing.actions.InvoicingDeleteSelectedAction">
+			<set property="restore" value="true" /> <!-- Initialize the restore property to -->
+			<!-- true before calling the execute() method of the action -->
+		</action>
+	</controller>
+
 </controllers>

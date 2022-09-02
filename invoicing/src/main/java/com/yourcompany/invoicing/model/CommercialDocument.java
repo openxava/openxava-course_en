@@ -22,9 +22,9 @@ import lombok.*;
     "customer;" +
     "details;" +
     "remarks" +
-"}"
+"}" 
 )
-abstract public class CommercialDocument extends Identifiable{
+abstract public class CommercialDocument extends Deletable {
 
     @Column(length=4)
     @DefaultValueCalculator(CurrentYearCalculator.class) // Current year
