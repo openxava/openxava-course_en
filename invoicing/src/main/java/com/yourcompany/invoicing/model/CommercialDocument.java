@@ -82,10 +82,16 @@ abstract public class CommercialDocument extends Deletable {
     private void calculateNumber() throws Exception {
         Query query = XPersistence.getManager()
             .createQuery("select max(i.number) from " +
-            getClass().getSimpleName() + // Thus it's valid for both Invoice and Order
+            getClass().getSimpleName() + // This it's valid for both Invoice and Order
             " i where i.year = :year");
         query.setParameter("year", year);
         Integer lastNumber = (Integer) query.getSingleResult();
         this.number = lastNumber == null ? 1 : lastNumber + 1;
     }
+    
+    public String toString() {
+        return year + "/" + number;
+    }
+    
+    
 }

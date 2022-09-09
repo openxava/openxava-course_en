@@ -7,7 +7,7 @@ import javax.ejb.*;
 import org.openxava.actions.*;
  
 public class SearchExcludingDeletedAction
-    extends SearchByViewKeyAction { // The standard OpenXava action to search
+    extends SearchExecutingOnChangeAction  { // The standard OpenXava action to search
  
     private boolean isDeletable() { // To see if this entity has a deleted property
         return getView().getMetaModel()

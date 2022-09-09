@@ -46,4 +46,28 @@
 		</action>
 	</controller>
 
+	<controller name="Order">
+		<extends controller="Invoicing" /> <!-- In order to have the standard actions -->
+
+		<action name="createInvoice" mode="detail"
+			class="com.yourcompany.invoicing.actions.CreateInvoiceFromOrderAction" />
+		<!-- mode="detail" : Only in detail mode -->
+
+		<!-- The new action -->
+		<action name="createInvoiceFromSelectedOrders" mode="list"
+			class="com.yourcompany.invoicing.actions.CreateInvoiceFromSelectedOrdersAction" />
+		<!-- mode="list": Only shown in list mode -->
+
+	</controller>
+
+	<controller name="InvoiceEdition">
+
+		<action name="save"
+			class="com.yourcompany.invoicing.actions.SaveInvoiceAction"
+			keystroke="Control S" />
+
+		<action name="close" class="org.openxava.actions.CancelAction" />
+
+	</controller>
+
 </controllers>
