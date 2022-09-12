@@ -31,6 +31,8 @@ public class Order extends CommercialDocument {
 	@ManyToOne
 	@ReferenceView("NoCustomerNoOrders") // This view is used to display invoice
 	@OnChange(ShowHideCreateInvoiceAction.class) // Add this
+	@SearchAction("Order.searchInvoice") // To define our own action to search invoices
+	@OnChangeSearch(OnChangeSearchInvoiceAction.class)
 	private Invoice invoice;
 
 	@Depends("date")
@@ -115,4 +117,11 @@ public class Order extends CommercialDocument {
 				invoice.getTotalAmount().add(getTotalAmount()));
 	}
 
+    // This method must return true for this order to be valid
+    @AssertTrue(message="customer_order_invoice_must_match") 
+    private boolean isInvoiceCustomerMatches() {
+    	return invoice == null || // invoice is optional
+    		invoice.getCustomer().getNumber() == getCustomer().getNumber();
+    }
+    
 }

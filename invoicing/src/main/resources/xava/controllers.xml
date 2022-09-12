@@ -38,6 +38,7 @@
 
 	</controller>
 
+
 	<controller name="Trash">
 		<action name="restore" mode="list"
 			class="com.yourcompany.invoicing.actions.InvoicingDeleteSelectedAction">
@@ -45,6 +46,7 @@
 			<!-- true before calling the execute() method of the action -->
 		</action>
 	</controller>
+
 
 	<controller name="Order">
 		<extends controller="Invoicing" /> <!-- In order to have the standard actions -->
@@ -58,7 +60,13 @@
 			class="com.yourcompany.invoicing.actions.CreateInvoiceFromSelectedOrdersAction" />
 		<!-- mode="list": Only shown in list mode -->
 
+		<action name="searchInvoice"
+			class="com.yourcompany.invoicing.actions.SearchInvoiceFromOrderAction"
+			hidden="true" icon="magnify" />
+		<!-- hidden="true" : Because we don't want the action to be shown in module 
+			button bar icon="magnify" : The same icon as for the standard search action -->
 	</controller>
+
 
 	<controller name="InvoiceEdition">
 
@@ -67,6 +75,28 @@
 			keystroke="Control S" />
 
 		<action name="close" class="org.openxava.actions.CancelAction" />
+
+	</controller>
+
+
+	<controller name="Invoice">
+		<extends controller="Invoicing" />
+
+		<action name="addOrders"
+			class="com.yourcompany.invoicing.actions.GoAddOrdersToInvoiceAction"
+			hidden="true" icon="table-row-plus-after" />
+		<!-- hidden="true" : Because we don't want the action to be shown in module 
+			button bar icon="table-row-plus-after" : The same icon as for the standard 
+			action -->
+
+	</controller>
+
+	<controller name="AddOrdersToInvoice">
+		<extends controller="AddToCollection" /> <!-- Extends from the standard controller -->
+
+		<!-- Overwrites the action to add -->
+		<action name="add"
+			class="com.yourcompany.invoicing.actions.AddOrdersToInvoiceAction" />
 
 	</controller>
 

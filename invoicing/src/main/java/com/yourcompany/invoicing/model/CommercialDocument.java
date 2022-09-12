@@ -28,6 +28,7 @@ abstract public class CommercialDocument extends Deletable {
 
     @Column(length=4)
     @DefaultValueCalculator(CurrentYearCalculator.class) // Current year
+    @SearchKey
     int year;
  
     @Column(length=6)
@@ -35,6 +36,7 @@ abstract public class CommercialDocument extends Deletable {
     //      properties=@PropertyValue(name="year")
     // )
     @ReadOnly // The user cannot modify the value
+    @SearchKey
     int number;
  
     @Required
