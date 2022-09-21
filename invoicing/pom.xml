@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>org.openxava</groupId>
 			<artifactId>openxava</artifactId>
-			<version>7.0m6</version>
+			<version>7.0</version>
 		</dependency>
 		
 		<!-- 
