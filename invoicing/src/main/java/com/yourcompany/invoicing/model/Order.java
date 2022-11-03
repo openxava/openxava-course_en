@@ -25,7 +25,7 @@ import lombok.*;
 		"year, number, date;" + // Ideal to be used from Invoice
 				"details;" + "remarks")
 @Tab(baseCondition = "${deleted} = false")
-@Tab(name = "Deleted", baseCondition = "deleted = true") // A named tab
+@Tab(name = "Deleted", baseCondition = "${deleted} = true") // A named tab
 public class Order extends CommercialDocument {
 
 	@ManyToOne
