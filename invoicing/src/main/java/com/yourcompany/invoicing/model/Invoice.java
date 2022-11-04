@@ -18,8 +18,8 @@ members=                      // that does not include customer and orders
     "details;" +
     "remarks"
 )
-@Tab(baseCondition = "deleted = false")
-@Tab(name="Deleted", baseCondition = "deleted = true") // A named tab
+@Tab(baseCondition = "${deleted} = false")
+@Tab(name="Deleted", baseCondition = "${deleted} = true") // A named tab
 public class Invoice extends CommercialDocument{
 
 	//@Hidden // It will not be shown by default in views and tabs
