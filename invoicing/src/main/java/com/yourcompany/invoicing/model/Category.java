@@ -12,11 +12,5 @@ public class Category extends Identifiable{
  
     @Column(length=50)
     String description; 
- 
- 
-    @URL
-    @Column(length=500)
-    @ReadOnly
-    String desc;
     
 }

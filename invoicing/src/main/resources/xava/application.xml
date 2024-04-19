@@ -12,14 +12,6 @@
 
 	<!-- You can define additional modules, for example: <module name="OnlyReadTeacher"> 
 		<model name="Teacher"/> <controller name="Print"/> </module> -->
-	<module name="Product">
-		<!-- To give a local value to the environment variable for this module -->
-		<env-var name="XAVA_SEARCH_ACTION"
-			value="Product.searchByNumber" />
-		<model name="Product" />
-		<controller name="Product" />
-		<controller name="Invoicing" />
-	</module>
 
 	<module name="InvoiceTrash">
 		<env-var name="XAVA_LIST_ACTION" value="Trash.restore" /> <!-- The action to be shown in each row -->
